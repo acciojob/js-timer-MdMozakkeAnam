@@ -1,27 +1,29 @@
-// write js code here if required
-function maxArea(heights) {
-    let left = 0;
-    let right = heights.length - 1;
-    let maxArea = 0;
+// write js code here if 
+function showTimer() {
+    const now = new Date();
 
-    while (left < right) {
-        // Calculate width and height
-        const width = right - left;
-        const height = Math.min(heights[left], heights[right]);
+    let day = now.getDate();
+    let month = now.getMonth() + 1; // Months start from 0
+    let year = now.getFullYear();
 
-        // Calculate area
-        const area = width * height;
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
 
-        // Update maxArea if needed
-        maxArea = Math.max(maxArea, area);
+    // Add leading zero if needed
+    if (minutes < 10) minutes = "0" + minutes;
+    if (seconds < 10) seconds = "0" + seconds;
+    if (hours < 10) hours = "0" + hours;
+    if (day < 10) day = "0" + day;
+    if (month < 10) month = "0" + month;
 
-        // Move the pointer for the shorter line
-        if (heights[left] < heights[right]) {
-            left++;
-        } else {
-            right--;
-        }
-    }
+    const timer = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
 
-    return maxArea;
+    document.querySelector("p").textContent = timer;
 }
+
+// Update every second
+setInterval(showTimer, 1000);
+
+// Run immediately once
+showTimer();
